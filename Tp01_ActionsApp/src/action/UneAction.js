@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import BoutonAction from './BoutonAction'
 
 /**
@@ -7,16 +7,19 @@ import BoutonAction from './BoutonAction'
  *
  * TODO modifier le code pour afficher le titre de l'action et les boutons associés.
  */
-const UneAction = ({action}) => (
-    <View style={styles.conteneurUneAction}>
-        <Text style={styles.texteUneAction}>
-            {action.name}
-        </Text>
-        <View style={styles.boutons}>
-
+const UneAction = ({action, funcs}) => {
+    return (
+        <View style={styles.conteneurUneAction}>
+            <Text style={styles.texteUneAction}>
+                {action.name}
+            </Text>
+            <View style={styles.boutons}>
+                <BoutonAction nom="Terminé" funcs={funcs} action={action} />
+                <BoutonAction nom="Supprimer" funcs={funcs} action={action} />
+            </View>
         </View>
-    </View>
-)
+    )
+}
 
 const styles = StyleSheet.create({
     conteneurUneAction: {
@@ -33,7 +36,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 3,
         shadowColor: '#000000',
-        shadowOffset: { width: 2, height: 2 },
+        shadowOffset: {
+            width: 2,
+            height: 2
+        },
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -45,6 +51,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
-    },
+    }
 })
 export default UneAction
