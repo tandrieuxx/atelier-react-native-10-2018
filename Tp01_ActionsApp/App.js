@@ -15,7 +15,8 @@ export default class App extends React.Component {
     // stocker
     state = {
         texteSaisie: '',
-        actions: []
+        actions: [],
+        filter: 'all'
     }
 
     /**
@@ -59,7 +60,7 @@ export default class App extends React.Component {
         this.setState({actions: actions});
     }
 
-    render() {
+    render = () => {
         const {texteSaisie} = this.state
 
         return (
@@ -71,10 +72,19 @@ export default class App extends React.Component {
                         evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)}/>
                     <ListeActions
                         actions={this.state.actions}
-                        funcs={{delete: this.deleteAction, finish:this.finishAction}}/>
+                        filter={this.state.filter}
+                        funcs={{
+                        delete: this.deleteAction,
+                        finish: this.finishAction
+                    }}/>
                     <BoutonCreer onValider={() => this.validerNouvelleAction()}/>
                 </ScrollView>
-                < Menu/>
+                <Menu
+                    filters={{
+                    all: () => this.setState({filter: 'all'}),
+                    done: () => this.setState({filter: 'done'}),
+                    active: () => this.setState({filter: 'active'})
+                }}/>
             </View>
         )
     }
